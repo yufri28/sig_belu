@@ -28,6 +28,11 @@ class Wisata_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
+    public function getWisataByIdOld($wisata_id) {
+        $this->db->where('id_wisata', $wisata_id);
+        return $this->db->get('wisata')->row_array();
+    }
+
     public function get_all_join($id = null)
     {
         $this->db->select('wisata.*, kecamatan.nama_kecamatan, admin.username as pengelola, kategori.nama_kategori');
@@ -82,7 +87,27 @@ class Wisata_model extends CI_Model {
         }
     }
 
+    public function get_wisata_populer(){
+        $this->db->select('f_id_wisata, (Januari + Februari + Maret + April + Mei + Juni + Juli + Agustus + September + Oktober + November + Desember) as total_pengunjung');
+        $this->db->from('kunjungan'); // Ganti dengan nama tabel yang sesuai
+        $this->db->where('tahun', 2025); // Ganti dengan tahun yang sesuai jika diperlukan
+        $this->db->order_by('total_pengunjung', 'DESC');
+        $this->db->limit(3);
+        $query = $this->db->get();
 
+        return $query->result();
+
+    }
+    
+    public function get_group_wisata_by_kategori() {
+        $this->db->select('*');
+        $this->db->from('wisata');
+        $this->db->join('kategori', 'kategori.id_kategori = wisata.f_id_kategori');
+        $this->db->order_by('kategori.nama_kategori');
+        
+        return $this->db->get()->result_array();
+    }
+    
 
     public function get_wisata_by_id($id)
     {

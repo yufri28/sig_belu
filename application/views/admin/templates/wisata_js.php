@@ -1,20 +1,48 @@
 <script>
-var multipleLineChart = document
-    .getElementById("multipleLineChart")
-    .getContext("2d");
-
-
 // Data yang diterima dari server
+var data = <?= $jumlah_kunjungan; ?>;
+
+// Labels bulan (Jan - Dec)
 var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+// Fungsi untuk konversi nama bulan ke index
+function getMonthIndex(bulan) {
+    var months = {
+        "January": 0,
+        "February": 1,
+        "March": 2,
+        "April": 3,
+        "May": 4,
+        "June": 5,
+        "July": 6,
+        "August": 7,
+        "September": 8,
+        "October": 9,
+        "November": 10,
+        "December": 11
+    };
+    return months[bulan];
+}
+
 // Persiapkan data untuk grafik
-var datasets = [];
-var data = <?= $jumlah_kunjungan; ?>
-// Loop untuk menyiapkan data setiap wisata
+var wisataData = {};
+
+// Mengelompokkan data berdasarkan nama_wisata
 data.forEach(function(item) {
+    if (!wisataData[item.nama_wisata]) {
+        wisataData[item.nama_wisata] = new Array(12).fill(0); // Isi awal dengan nol untuk 12 bulan
+    }
+    // Isi kunjungan di bulan tertentu
+    var bulanIndex = getMonthIndex(item.bulan);
+    wisataData[item.nama_wisata][bulanIndex] = parseInt(item.total_kunjungan);
+});
+
+// Membuat dataset untuk grafik
+var datasets = [];
+Object.keys(wisataData).forEach(function(nama_wisata) {
     var dataset = {
-        label: item.nama_wisata,
-        borderColor: getRandomColor(), // Bisa Anda tentukan warna berdasarkan wisata
+        label: nama_wisata,
+        borderColor: getRandomColor(),
         pointBorderColor: "#FFF",
         pointBackgroundColor: getRandomColor(),
         pointBorderWidth: 2,
@@ -24,11 +52,7 @@ data.forEach(function(item) {
         backgroundColor: "transparent",
         fill: true,
         borderWidth: 2,
-        data: [
-            item.januari, item.februari, item.maret, item.april, item.mei,
-            item.juni, item.juli, item.agustus, item.september, item.oktober,
-            item.november, item.desember
-        ]
+        data: wisataData[nama_wisata] // Data kunjungan untuk setiap bulan
     };
     datasets.push(dataset);
 });
@@ -66,7 +90,6 @@ var myMultipleLineChart = new Chart(multipleLineChart, {
     },
 });
 
-
 // Fungsi untuk menghasilkan warna acak
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -76,6 +99,84 @@ function getRandomColor() {
     }
     return color;
 }
+
+// var multipleLineChart = document
+//     .getElementById("multipleLineChart")
+//     .getContext("2d");
+
+
+// // Data yang diterima dari server
+// var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// // Persiapkan data untuk grafik
+// var datasets = [];
+// var data = <?= $jumlah_kunjungan; ?>
+// // Loop untuk menyiapkan data setiap wisata
+// data.forEach(function(item) {
+//     var dataset = {
+//         label: item.nama_wisata,
+//         borderColor: getRandomColor(), // Bisa Anda tentukan warna berdasarkan wisata
+//         pointBorderColor: "#FFF",
+//         pointBackgroundColor: getRandomColor(),
+//         pointBorderWidth: 2,
+//         pointHoverRadius: 4,
+//         pointHoverBorderWidth: 1,
+//         pointRadius: 4,
+//         backgroundColor: "transparent",
+//         fill: true,
+//         borderWidth: 2,
+//         data: [
+//             item.januari, item.februari, item.maret, item.april, item.mei,
+//             item.juni, item.juli, item.agustus, item.september, item.oktober,
+//             item.november, item.desember
+//         ]
+//     };
+//     datasets.push(dataset);
+// });
+
+// // Konfigurasi dan pembuatan grafik
+// var myMultipleLineChart = new Chart(multipleLineChart, {
+//     type: "line",
+//     data: {
+//         labels: labels,
+//         datasets: datasets
+//     },
+//     options: {
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         legend: {
+//             position: "top",
+//         },
+//         tooltips: {
+//             bodySpacing: 4,
+//             mode: "nearest",
+//             intersect: 0,
+//             position: "nearest",
+//             xPadding: 10,
+//             yPadding: 10,
+//             caretPadding: 10,
+//         },
+//         layout: {
+//             padding: {
+//                 left: 15,
+//                 right: 15,
+//                 top: 15,
+//                 bottom: 15
+//             },
+//         },
+//     },
+// });
+
+
+// // Fungsi untuk menghasilkan warna acak
+// function getRandomColor() {
+//     var letters = '0123456789ABCDEF';
+//     var color = '#';
+//     for (var i = 0; i < 6; i++) {
+//         color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+// }
 
 // Chart with HTML Legends
 

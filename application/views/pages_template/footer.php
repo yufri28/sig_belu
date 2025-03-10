@@ -1,17 +1,59 @@
-<hr>
-<footer>
-    <p>&copy; 2024 Dinas Pariwisata Kabupaten Belu. All Rights Reserved.</p>
-    <div class="social-icons">
-        <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+</main>
+<footer class="site-footer">
+    <div class="site-footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mt-5">
+                    <div class="d-flex">
+                        <div class="copyright-text me-2">
+                            <img src="<?=base_url('assets/');?>/img/logo-32x32.png" alt="">
+                        </div>
+                        <h5 class="copyright-text"> Dinas Parawisata Kabupaten
+                            Belu
+                            <p class="copyright-text">Jln. Soekarno-Hatta, No. 28 - Atambua, Tel. 0389-2513235</p>
+                        </h5>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center col-12 mt-lg-5">
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="https://www.facebook.com/profile.php?id=100014992931309" class="site-footer-link">
+                                <i class="fab fa-facebook"></i> Belu Pariwisata
+                            </a>
+                        </li>
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">
+                                <i class="fab fa-instagram"></i> belu.travel
+                            </a>
+                        </li>
+                        <li class="site-footer-link-item">
+                            <a href="https://www.youtube.com/@belupariwisata3484" class="site-footer-link">
+                                <i class="fab fa-youtube"></i> Belu Parawisata
+                            </a>
+                        </li>
+                        <li class="site-footer-link-item">
+                            <a href="https://www.tiktok.com/@belu_pariwisata?_t=ZS-8uJoENY8gad&_r=1"
+                                class="site-footer-link">
+                                <i class="fab fa-tiktok"></i> belu_pariwisata
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
     </div>
 </footer>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script> -->
-<!-- <script src="../../assets/js/script.js"></script> -->
+
+<!-- JAVASCRIPT FILES -->
+<script src="<?=base_url('assets/');?>js/jquery.min.js"></script>
+<script src="<?=base_url('assets/');?>js/bootstrap.min.js"></script>
+<script src="<?=base_url('assets/');?>js/jquery.sticky.js"></script>
+<!-- <script src="<?=base_url('assets/');?>js/click-scroll.js"></script> -->
+<script src="<?=base_url('assets/');?>js/custom.js"></script>
+<!-- Tambahkan JavaScript Lightbox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
 
 </html>

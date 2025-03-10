@@ -94,7 +94,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <div class="bottom-text mt-3">
-                    <p><a href="./indeks.html">Kembali Beranda</a></p>
+                    <p><a href="<?=base_url('pages');?>">Kembali Beranda</a></p>
                 </div>
             </form>
         </div>

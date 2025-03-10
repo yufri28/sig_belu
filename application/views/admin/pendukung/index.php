@@ -1,6 +1,6 @@
 <div class="container">
     <div class="page-inner">
-        <h3 class="fw-bold mb-3">Fasilitas Pendukung</h3>
+        <h3 class="fw-bold mb-3">Fasilitas</h3>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -264,9 +264,15 @@
                                         <td><?=$i++?>.</td>
                                         <td><?=$fasilitas['nama_wisata'];?></td>
                                         <td><?=$fasilitas['nama_fasilitas'];?></td>
-                                        <td><img style="width: 50px; height:50px;"
-                                                src="<?=base_url('uploads/fasilitas/'.$fasilitas['foto'])?>"
-                                                alt="Foto <?=$fasilitas['nama_fasilitas']?>"></td>
+                                        <td>
+                                            <a href="<?=base_url('uploads/fasilitas/'.$fasilitas['foto'])?>"
+                                                data-lightbox="fasilitas-<?=$fasilitas['id_fasilitas_wisata'];?>"
+                                                data-title="Foto <?=$fasilitas['nama_fasilitas']?>">
+                                                <img style="width: 50px; height:50px; object-fit: cover;"
+                                                    src="<?=base_url('uploads/fasilitas/'.$fasilitas['foto'])?>"
+                                                    alt="Foto <?=$fasilitas['nama_fasilitas']?>">
+                                            </a>
+                                        </td>
                                         <td><?= substr($fasilitas['keterangan'], 0, 10) ?>...</td>
                                         <td><?=$fasilitas['tarif'];?></td>
                                         <td>

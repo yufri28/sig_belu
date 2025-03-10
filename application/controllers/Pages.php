@@ -8,6 +8,7 @@ class Pages extends CI_Controller {
 		parent::__construct();
         $this->load->model('Wisata_model');
         $this->load->model('Fasilitas_model');
+        $this->load->model('Larangan_model');
         $this->load->model('Ulasan_model');
         $this->load->model('Contact_model');
 	}
@@ -27,7 +28,7 @@ class Pages extends CI_Controller {
 	{
 		$data = [
             'menu' => 'tempat_wisata',
-            'wisata_list' => $this->Wisata_model->get_all_join(),
+            'wisata_list' => $this->Wisata_model->get_group_wisata_by_kategori(),
         ]; 
          
 		$this->load->view('pages_template/header', $data);
@@ -50,9 +51,11 @@ class Pages extends CI_Controller {
     public function detail_wisata($id)
 	{
 		$data = [
+			'wisata_list' => $this->Wisata_model->get_all_join(),
             'menu' => 'detail_wisata',
             'wisata' => $this->Wisata_model->get_wisata_by_id($id),
             'fasilitas_list' => $this->Fasilitas_model->get_all_join_by_id($id),
+            'larangan_list' => $this->Larangan_model->get_all_join_by_id($id),
             'ulasan' => $this->Ulasan_model->get_comments_with_replies($id),
         ]; 
          

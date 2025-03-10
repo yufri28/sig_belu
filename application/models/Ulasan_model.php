@@ -29,6 +29,17 @@ class Ulasan_model extends CI_Model {
     public function insert_comment($data) {
         $this->db->insert('ulasan', $data);
     }
+
+    public function deleteComment($id_ulasan)
+    {
+        return $this->db->delete('ulasan', ['id_ulasan' => $id_ulasan]);
+    }
+
+    public function deleteReply($id_ulasan)
+    {
+        return $this->db->delete('ulasan', ['id_ulasan' => $id_ulasan]);
+    }
+
 }
 
 ?>

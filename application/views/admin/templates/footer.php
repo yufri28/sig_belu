@@ -120,6 +120,21 @@
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="<?=base_url()?>assets/js/setting-demo.js"></script>
 
+<!-- Tambahkan JavaScript Lightbox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<!-- jQuery UI for datepicker -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- JSZip (Required for Excel export) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+<!-- pdfmake (Required for PDF export) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
 <!-- Alerts -->
 <!-- begin::Alert -->
 <?php if ($this->session->flashdata('success')): ?>
@@ -190,6 +205,110 @@ $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
 
 <!-- datatables -->
 <script>
+$(document).ready(function() {
+    var table = $('#add-row-kunjungan').DataTable({
+        dom: 'Bfrtip',
+        buttons: [{
+                extend: 'csv',
+                text: 'Export CSV',
+                title: 'Data Kunjungan Wisata',
+                exportOptions: {
+                    columns: [0, 1, 3, 4]
+                }
+            },
+            {
+                extend: 'excel',
+                text: 'Export EXCEL',
+                title: 'Data Kunjungan Wisata',
+                exportOptions: {
+                    columns: [0, 1, 3, 4]
+                }
+            },
+            {
+                extend: 'pdf',
+                text: 'Export PDF',
+                title: 'Data Kunjungan Wisata',
+                customize: function(doc) {
+
+                    // Set judul ke tengah
+                    doc.content[1].alignment = 'center';
+
+                    // Cari tabel dalam konten PDF
+                    for (let i = 0; i < doc.content.length; i++) {
+                        if (doc.content[i].table) {
+                            // Terapkan border pada tabel jika ditemukan
+                            let objLayout = {};
+                            objLayout['hLineWidth'] = function(i) {
+                                return 0.5;
+                            }; // Ketebalan garis horizontal
+                            objLayout['vLineWidth'] = function(i) {
+                                return 0.5;
+                            }; // Ketebalan garis vertikal
+                            objLayout['hLineColor'] = function(i) {
+                                return '#000000';
+                            }; // Warna garis horizontal
+                            objLayout['vLineColor'] = function(i) {
+                                return '#000000';
+                            }; // Warna garis vertikal
+                            objLayout['paddingLeft'] = function(i) {
+                                return 4;
+                            };
+                            objLayout['paddingRight'] = function(i) {
+                                return 4;
+                            };
+                            objLayout['paddingTop'] = function(i) {
+                                return 2;
+                            };
+                            objLayout['paddingBottom'] = function(i) {
+                                return 2;
+                            };
+
+                            // Set layout untuk tabel
+                            doc.content[i].layout = objLayout;
+
+                            // Set tabel ke tengah dengan widths relatif
+                            doc.content[i].table.widths = Array(doc.content[i].table.body[0]
+                                .length + 1).join('*').split('');
+                        }
+                    }
+                },
+                exportOptions: {
+                    columns: [0, 1, 3, 4] // Pilih kolom berdasarkan index
+                }
+            }
+        ]
+    });
+
+    // Filter by date range
+    $('#filterDateBtn').on('click', function() {
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+
+        if (startDate !== '' && endDate !== '') {
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                var date = data[3]; // Kolom tanggal
+                var min = new Date(startDate).getTime();
+                var max = new Date(endDate).getTime();
+                var dateValue = new Date(date).getTime();
+
+                if ((isNaN(min) && isNaN(max)) || (isNaN(min) && dateValue <=
+                        max) || (min <= dateValue && isNaN(max)) || (min <=
+                        dateValue &&
+                        dateValue <= max)) {
+                    return true;
+                }
+                return false;
+            });
+            table.draw();
+        }
+    });
+});
+
+$(function() {
+    $(".datepicker").datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+});
 $(document).ready(function() {
     // Add Row
     $("#add-row").DataTable({

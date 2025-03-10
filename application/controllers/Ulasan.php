@@ -30,6 +30,29 @@ class Ulasan extends CI_Controller {
         $this->ulasan_model->insert_comment($data);
         redirect('pages/detail_wisata/'.$f_id_wisata);
     }
+
+    public function delete()
+    {
+        $commentId = $this->input->post('id_ulasan');
+        
+        if ($this->ulasan_model->deleteComment($commentId)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false]);
+        }
+    }
+
+    public function deleteReply()
+    {
+        $replyId = $this->input->post('id_ulasan');
+        
+        if ($this->ulasan_model->deleteReply($replyId)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false]);
+        }
+    }
+
 }
 
 

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>SIG WISATA BELU</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="<?=base_url('assets/');?>/img/logo-32x32.png" sizes="32x32" />
     <!-- Fonts and icons -->
     <script src="<?=base_url()?>assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -40,6 +41,9 @@
     <!-- end::Sweetalert -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Tambahkan CSS Lightbox -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
 </head>
 
@@ -82,16 +86,28 @@
                                 <p>Wisata</p>
                             </a>
                         </li>
-                        <li class="nav-item <?=$menu == 'peta'?'active':'';?>">
+                        <!-- <li class="nav-item <?=$menu == 'peta'?'active':'';?>">
                             <a href="<?=base_url('peta');?>">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <p>Peta</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item <?=$menu == 'pendukung'?'active':'';?>">
                             <a href="<?=base_url('fasilitaspendukung');?>">
                                 <i class="fas fa-layer-group"></i>
-                                <p>Fasilitas Pendukung</p>
+                                <p>Fasilitas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?=$menu == 'kunjungan'?'active':'';?>">
+                            <a href="<?=base_url('kunjungan');?>">
+                                <i class="fas fa-calculator"></i>
+                                <p>Kunjungan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?=$menu == 'larangan'?'active':'';?>">
+                            <a href="<?=base_url('tandalarangan');?>">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>Tanda Larangan</p>
                             </a>
                         </li>
                         <?php if($this->session->userdata("role") == 'admin'):?>

@@ -74,41 +74,36 @@
         <div id="map" style="height: 650px; z-index: 1;" class="rounded-4 mb-4"></div>
     </div>
 </section>
-
 <section class="section-padding" style="background-color: #9ccddb;">
-    <h3 class="text-center mb-5">Destinasi Terpopuler</h3>
+    <h3 class="text-center mb-5">5 Destinasi Terpopuler</h3>
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="card col-4 bg-transparent border-0" style="width: 25rem;">
-                <img src="https://mollyrentcar.com/wp-content/uploads/2024/07/Air-Terjun-Siata-Mauhalek-1.jpg.webp"
-                    class="card-img-top img-fluid rounded-4" alt="...">
+            <?php foreach($destinasi_terpopuler as $destinasi): ?>
+            <?php
+                // Decode JSON foto
+                $fotos = json_decode($destinasi['foto'], true);
+                // Ambil 1 gambar pertama dari array JSON
+                $foto_ditampilkan = !empty($fotos) ? $fotos[0] : 'default.jpg'; // Fallback ke 'default.jpg' jika tidak ada foto
+            ?>
+            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;">
+                <div class="card-img-top img-fluid rounded-4">
+                    <a href="<?=base_url('uploads/wisata/') . $foto_ditampilkan;?>"
+                        data-lightbox="wisata-<?=$destinasi['id_wisata'];?>"
+                        data-title="Foto <?=$destinasi['nama_wisata'];?>">
+                        <img src="<?=base_url('uploads/wisata/') . $foto_ditampilkan;?>" class="img-fluid rounded-4"
+                            alt="Foto <?=$destinasi['nama_wisata'];?>">
+                    </a>
+                </div>
                 <div class="card-body text-center">
                     <div class="card-title">
-                        Fulan Fehan
+                        <?= $destinasi['nama_wisata']; ?>
                     </div>
-                    <a href="#" class="btn btn-light">Lihat selengkapnya</a>
+                    <a href="<?= base_url('pages/detail_wisata/'.$destinasi['id_wisata']); ?>"
+                        class="btn btn-light">Lihat
+                        selengkapnya</a>
                 </div>
             </div>
-            <div class="card col-4 bg-transparent border-0" style="width: 25rem;">
-                <img src="https://mollyrentcar.com/wp-content/uploads/2024/07/Air-Terjun-Siata-Mauhalek-1.jpg.webp"
-                    class="card-img-top img-fluid rounded-4" alt="...">
-                <div class="card-body text-center">
-                    <div class="card-title">
-                        Fulan Fehan
-                    </div>
-                    <a href="#" class="btn btn-light">Lihat selengkapnya</a>
-                </div>
-            </div>
-            <div class="card col-4 bg-transparent border-0" style="width: 25rem;">
-                <img src="https://mollyrentcar.com/wp-content/uploads/2024/07/Air-Terjun-Siata-Mauhalek-1.jpg.webp"
-                    class="card-img-top img-fluid rounded-4" alt="...">
-                <div class="card-body text-center">
-                    <div class="card-title">
-                        Fulan Fehan
-                    </div>
-                    <a href="#" class="btn btn-light">Lihat selengkapnya</a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -119,7 +114,6 @@
             <h2 class="text-white mb-4">At a Glance</h2>
             <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
                 <div class="services-info">
-
                     <p class="text-white">Belu adalah kabupaten di Nusa Tenggara Timur yang berbatasan langsung
                         dengan negara Timor Leste. Dengan luas wilayah 1.284,94 km^2 dan terbagi dalam 12
                         kecamatan. Kota 'Belu' menurut penuturan para tetua ada bermakna Persahabatan. Sedangkan

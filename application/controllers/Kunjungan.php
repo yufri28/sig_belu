@@ -71,9 +71,7 @@ class Kunjungan extends CI_Controller {
         $this->load->view('admin/templates/footer');
         $this->load->view('admin/templates/wisata_js');
     }
-    
-    
-
+   
     // Function untuk mengambil data kunjungan per bulan
     public function get_kunjungan_data($id = null, $tahun = null) {
         $data = $this->Kunjungan_model->get_kunjungan_per_bulan($id, $tahun);

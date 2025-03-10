@@ -26,6 +26,18 @@ class Kunjungan_model extends CI_Model {
         return $this->db->get()->result_array();
     }
     
+    public function get_top_5_destinasi()
+    {
+        // Misal tabel kunjungan menyimpan destinasi_id untuk setiap kunjungan
+        $this->db->select('wisata.*, COUNT(kunjungan.f_id_wisata) as total_kunjungan');
+        $this->db->from('wisata');
+        $this->db->join('kunjungan', 'kunjungan.f_id_wisata = wisata.id_wisata', 'left');
+        $this->db->group_by('wisata.id_wisata');
+        $this->db->order_by('total_kunjungan', 'DESC');
+        $this->db->limit(5);
+        
+        return $this->db->get()->result_array(); // Mengembalikan array dari 5 destinasi terpopuler
+    }
 
     public function get_kunjungan_per_bulan($id = null, $year = null) {
         // Menggunakan tahun saat ini jika parameter $year tidak diberikan

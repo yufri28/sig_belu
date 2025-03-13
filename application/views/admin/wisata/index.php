@@ -164,7 +164,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_kecamatan"
+                                                        <select required class="form-control" name="f_id_kecamatan"
                                                             id="f_id_kecamatan">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($kecamatan_list as $key => $kecamatan):?>
@@ -180,7 +180,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_kategori"
+                                                        <select required class="form-control" name="f_id_kategori"
                                                             id="f_id_kategori">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($kategori_list as $key => $kategori):?>
@@ -197,7 +197,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_pengelola"
+                                                        <select required class="form-control" name="f_id_pengelola"
                                                             id="f_id_pengelola">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($pengelola_list as $key => $pengelola):?>
@@ -405,7 +405,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_kecamatan"
+                                                        <select required class="form-control" name="f_id_kecamatan"
                                                             id="f_id_kecamatan">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($kecamatan_list as $key => $kecamatan):?>
@@ -421,7 +421,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_kategori"
+                                                        <select required class="form-control" name="f_id_kategori"
                                                             id="f_id_kategori">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($kategori_list as $key => $kategori):?>
@@ -438,7 +438,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_pengelola"
+                                                        <select required class="form-control" name="f_id_pengelola"
                                                             id="f_id_pengelola">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($pengelola_list as $key => $pengelola):?>
@@ -576,7 +576,7 @@
                                         <div class="modal-body">
                                             <p>Apakah Anda yakin ingin menghapus wisata <strong
                                                     id="nama_wisata"></strong>?</p>
-                                            <input type="hidden" id="delete_wisata_id" name="id_wisata" />
+                                            <input required type="hidden" id="delete_wisata_id" name="id_wisata" />
                                         </div>
                                         <div class="modal-footer border-0">
                                             <button type="button" class="btn btn-secondary"

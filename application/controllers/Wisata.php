@@ -215,14 +215,14 @@ class Wisata extends CI_Controller {
 		$result = $this->Wisata_model->update('wisata', $data, "id_wisata = " . $id);
 
 		// Cek jika tidak ada kunjungan, tambahkan entry kunjungan
-		$cek_row_kunjungan = $this->Kunjungan_model->cek_kunjungan($id);
-		if ($cek_row_kunjungan < 1) {
-			$kunjungan = [
-				'tahun' => date("Y"),
-				'f_id_wisata' => $id
-			];
-			$this->Kunjungan_model->insert('kunjungan', $kunjungan);
-		}
+		// $cek_row_kunjungan = $this->Kunjungan_model->cek_kunjungan($id);
+		// if ($cek_row_kunjungan < 1) {
+		// 	$kunjungan = [
+		// 		'tahun' => date("Y"),
+		// 		'f_id_wisata' => $id
+		// 	];
+		// 	$this->Kunjungan_model->insert('kunjungan', $kunjungan);
+		// }
 
 		if ($result) {
 			$this->session->set_flashdata('success', 'Data berhasil diedit.');

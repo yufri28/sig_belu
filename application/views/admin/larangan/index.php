@@ -37,7 +37,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_wisata"
+                                                        <select required class="form-control" name="f_id_wisata"
                                                             id="f_id_wisata">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($wisata_list as $key => $wisata):?>
@@ -129,7 +129,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <select class="form-control" name="f_id_wisata"
+                                                        <select required class="form-control" name="f_id_wisata"
                                                             id="f_id_wisata">
                                                             <option value="">-- Pilih --</option>
                                                             <?php foreach ($wisata_list as $key => $wisata):?>

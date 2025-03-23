@@ -128,7 +128,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <textarea rows="5" required name="deskripsi" id="deskripsi"
+                                                        <textarea rows="5" name="deskripsi" id="deskripsi"
                                                             class="form-control"></textarea>
                                                     </div>
                                                     <div class="form-group form-group-default">
@@ -369,7 +369,7 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <textarea rows="5" required name="deskripsi" id="deskripsi"
+                                                        <textarea rows="5" name="deskripsi" id="deskripsi-edit"
                                                             class="form-control"></textarea>
                                                     </div>
                                                     <div class="form-group form-group-default">
@@ -662,7 +662,7 @@
                                                     data-latitude="<?=$wisata['latitude']?>"
                                                     data-longitude="<?=$wisata['longitude']?>"
                                                     data-geojson="<?=$wisata['geojson']?>"
-                                                    data-deskripsi="<?=$wisata['deskripsi']?>"
+                                                    data-deskripsi="<?=htmlspecialchars($wisata['deskripsi']);?>"
                                                     data-kontak="<?=$wisata['kontak']?>"
                                                     data-jam_kunjung="<?=$wisata['jam_kunjung']?>"
                                                     data-jam_tutup="<?=$wisata['jam_tutup']?>"
@@ -726,6 +726,28 @@ var marker = L.marker([<?=$wisata['latitude'];?>, <?=$wisata['longitude'];?>]).a
 <?php endforeach; ?>
 </script>
 
+
+<script>
+ClassicEditor
+    .create(document.querySelector('#deskripsi'))
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+</script>
+<script>
+let editorInstance;
+ClassicEditor
+    .create(document.querySelector('#deskripsi-edit'))
+    .then(editor => {
+        editorInstance = editor;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -823,13 +845,17 @@ document.addEventListener("DOMContentLoaded", function() {
         editButtons.querySelector('#latitude').value = latitude;
         editButtons.querySelector('#longitude').value = longitude;
         editButtons.querySelector('#geojson').value = geojson;
-        editButtons.querySelector('#deskripsi').value = deskripsi;
+        editButtons.querySelector('#deskripsi-edit').value = deskripsi;
         editButtons.querySelector('#kontak').value = kontak;
         editButtons.querySelector('#jam_kunjung').value = jamKunjung;
         editButtons.querySelector('#jam_tutup').value = jamTutup;
         editButtons.querySelector('#f_id_kecamatan').value = idKecamatan;
         editButtons.querySelector('#f_id_kategori').value = idKategori;
         editButtons.querySelector('#id_wisata').value = wisataId;
+
+        if (editorInstance) {
+            editorInstance.setData(deskripsi); // Update CKEditor content
+        }
     });
 
     deleteButtons.addEventListener('show.bs.modal', function(event) {

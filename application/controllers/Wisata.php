@@ -60,7 +60,7 @@ class Wisata extends CI_Controller {
 		$latitude = htmlspecialchars($this->input->post('latitude'));
 		$longitude = htmlspecialchars($this->input->post('longitude'));
 		$geojson = $this->input->post('geojson');
-		$deskripsi = htmlspecialchars($this->input->post('deskripsi'));
+		$deskripsi = $this->input->post('deskripsi');
 
 		$f_id_pengelola = $this->session->userdata('role') != 'admin'
 			? $this->session->userdata('user_id')
@@ -145,7 +145,7 @@ class Wisata extends CI_Controller {
 		$latitude = htmlspecialchars($this->input->post('latitude'));
 		$longitude = htmlspecialchars($this->input->post('longitude'));
 		$geojson = $this->input->post('geojson');
-		$deskripsi = htmlspecialchars($this->input->post('deskripsi'));
+		$deskripsi = $this->input->post('deskripsi');
 
 		$f_id_pengelola = $this->session->userdata('role') != 'admin'
 			? $this->session->userdata('user_id')

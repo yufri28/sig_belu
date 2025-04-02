@@ -42,12 +42,14 @@
         <!-- <img src="<?=base_url('uploads/wisata/'.$wisata['foto'])?>" class="img-fluid mt-3"
             alt="<?=$wisata['nama_wisata'];?>"> -->
         <?php
+            $last_foto = '';
             // Decode JSON foto
             $fotos = json_decode($wisata['foto'], true);
 
             // Periksa apakah ada foto yang bisa ditampilkan
             if (!empty($fotos)) {
                 foreach ($fotos as $index => $foto) {
+                    $last_foto = $foto;
                     // Tampilkan setiap foto dengan lightbox
                     ?>
         <a href="<?=base_url('uploads/wisata/') . $foto;?>" data-lightbox="wisata-<?=$wisata['id_wisata'];?>"
@@ -89,6 +91,7 @@
                 <small><i class="bi bi-patch-check-fill"></i> <?= $comment['email']; ?></small>
 
                 <?php
+                
         // Convert 'created_at' to timestamp and calculate the difference
         $createdAt = strtotime($comment['created_at']);
         $timeAgo = time() - $createdAt;
@@ -341,7 +344,6 @@
             vertical-align: middle;
         }
         </style>
-
         <script>
         var map = L.map('map').setView([<?=$wisata['latitude'];?>, <?=$wisata['longitude'];?>], 16);
 
@@ -351,7 +353,16 @@
 
         // Marker untuk wisata
         var marker = L.marker([<?=$wisata['latitude'];?>, <?=$wisata['longitude'];?>]).addTo(map)
-            .bindPopup('<b><?=$wisata['nama_wisata'];?></b><br>').openPopup();
+            .bindPopup('<div style="text-align: center;">' +
+                '<img src="<?=base_url('uploads/wisata/'.$last_foto);?>" alt="<?=$wisata['nama_wisata'];?>" style="width: 100%; height: auto; max-width: 300px; border-radius: 8px; margin-bottom: 5px;"><br>' +
+                '</div>' +
+                '<b><?=$wisata['nama_wisata'];?></b><br>' +
+                'Kontak: <?=$wisata['kontak'];?><br>' +
+                'Jam Kunjung: <?=$wisata['jam_kunjung'];?><br>' +
+                'Jam Tutup: <?=$wisata['jam_tutup'];?><br>' +
+                'Kecamatan: <?=$wisata['nama_kecamatan'];?><br>' +
+                'Kategori: <?=$wisata['nama_kategori'];?>').openPopup();
+
 
         // Polygon untuk wilayah wisata
         var polygonCoords = [<?=$wisata['geojson']; ?>];

@@ -99,8 +99,8 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <input id="tarif" required name="tarif" type="number"
-                                                            class="form-control" />
+                                                        <textarea rows="5" required name="tarif" id="tarif"
+                                                            class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,8 +199,8 @@
                                                                 <i class="text-danger">*</i>
                                                             </small>
                                                         </label>
-                                                        <input id="tarif" required name="tarif" type="number"
-                                                            class="form-control" />
+                                                        <textarea rows="5" required name="tarif" id="tarif"
+                                                            class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

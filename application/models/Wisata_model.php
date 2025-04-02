@@ -111,6 +111,8 @@ class Wisata_model extends CI_Model {
 
     public function get_wisata_by_id($id)
     {
+        $this->db->join('kecamatan', 'kecamatan.id_kecamatan = wisata.f_id_kecamatan');
+        $this->db->join('kategori', 'kategori.id_kategori = wisata.f_id_kategori');
         return $this->db->where('id_wisata', $id)->get('wisata')->row_array();
     }
     

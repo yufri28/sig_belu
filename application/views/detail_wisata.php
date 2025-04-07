@@ -401,7 +401,7 @@
                 '</div>' +
                 '<b><?=$fasilitas['nama_fasilitas'];?></b><br>' +
                 'Keterangan: <?=$fasilitas['keterangan'];?><br>' +
-                'Tarif: Rp. <?=number_format($fasilitas['tarif'], 0, ",", ".");?>'
+                'Tarif: <?=$fasilitas['tarif'];?>'
             );
         <?php endforeach; ?>
 

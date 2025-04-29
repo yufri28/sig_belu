@@ -159,23 +159,145 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
 //         '</div>' +
 //         '<b><?=$wisata['nama_wisata'];?></b><br>').openPopup();
 <?php endforeach; ?>
+// Definisikan ikon SVG untuk masing-masing kategori wisata
+var icons = {
+    'Alam': L.divIcon({
+        html: `<div style="color:rgb(12, 240, 65); font-size: 24px;"> <!-- Hijau -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+            </svg>
+        </div>`,
+        className: '',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    }),
+    'Religi': L.divIcon({
+        html: `<div style="color:rgb(151, 99, 248); font-size: 24px;"> <!-- Ungu -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+            </svg>
+        </div>`,
+        className: '',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    }),
+    'Budaya': L.divIcon({
+        html: `<div style="color:rgb(252, 164, 93); font-size: 24px;"> <!-- Oranye -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+            </svg>
+        </div>`,
+        className: '',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    }),
+    'Buatan': L.divIcon({
+        html: `<div style="color:rgb(0, 166, 255); font-size: 24px;"> <!-- Hijau Toska -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+            </svg>
+        </div>`,
+        className: '',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    }),
+    'Kuliner': L.divIcon({
+        html: `<div style="color: #dc3545; font-size: 24px;"> <!-- Merah -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+            </svg>
+        </div>`,
+        className: '',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    }),
+    'Default': L.divIcon({
+        html: `<div style="color:rgb(10, 132, 239); font-size: 24px;"> <!-- Abu-abu -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+            </svg>
+        </div>`,
+        className: '',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    })
+};
+
 <?php foreach ($wisata_list as $key => $wisata) : ?>
 <?php
-        // Decode JSON foto
-        $fotos = json_decode($wisata['foto'], true);
-        // Ambil hanya satu foto (foto pertama)
-        $foto_pertama = !empty($fotos) ? $fotos[0] : 'default.jpg'; // fallback ke 'default.jpg' jika tidak ada foto
-    ?>
-var marker = L.marker([<?=$wisata['latitude'];?>, <?=$wisata['longitude'];?>]).addTo(map)
+    $fotos = json_decode($wisata['foto'], true);
+    $foto_pertama = !empty($fotos) ? $fotos[0] : 'default.jpg';
+    $kategori = $wisata['nama_kategori'] ?? 'Default';
+?>
+var marker = L.marker(
+        [<?= $wisata['latitude']; ?>, <?= $wisata['longitude']; ?>], {
+            icon: icons['<?= $kategori; ?>'] || icons['Default']
+        }
+    ).addTo(map)
     .bindPopup(
         '<div style="text-align: center;">' +
-        '<a href="<?=base_url('uploads/wisata/' . $foto_pertama);?>" data-lightbox="wisata-<?=$wisata['id_wisata'];?>" data-title="<?=$wisata['nama_wisata'];?>">' +
-        '<img src="<?=base_url('uploads/wisata/' . $foto_pertama);?>" alt="<?=$wisata['nama_wisata'];?>" style="width: 100%; height: auto; max-width: 300px;"><br>' +
+        '<a href="<?= base_url('uploads/wisata/' . $foto_pertama); ?>" data-lightbox="wisata-<?= $wisata['id_wisata']; ?>" data-title="<?= $wisata['nama_wisata']; ?>">' +
+        '<img src="<?= base_url('uploads/wisata/' . $foto_pertama); ?>" alt="<?= $wisata['nama_wisata']; ?>" style="width: 100%; height: auto; max-width: 300px;"><br>' +
         '</a>' +
         '</div>' +
-        '<b><?=$wisata['nama_wisata'];?></b><br>'
-    ).openPopup();
+        '<b><?= $wisata['nama_wisata']; ?></b><br>'
+    );
 <?php endforeach; ?>
+
+var legend = L.control({
+    position: 'bottomright'
+});
+
+legend.onAdd = function(map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    var categories = [{
+            name: 'Alam',
+            color: 'rgb(12, 240, 65)'
+        }, // Hijau
+        {
+            name: 'Religi',
+            color: 'rgb(151, 99, 248)'
+        }, // Ungu
+        {
+            name: 'Budaya',
+            color: 'rgb(252, 164, 93)'
+        }, // Oranye
+        {
+            name: 'Buatan',
+            color: 'rgb(0, 166, 255)'
+        }, // Toska
+        {
+            name: 'Kuliner',
+            color: '#dc3545'
+        } // Merah
+    ];
+
+    div.style.background = 'white';
+    div.style.padding = '10px';
+    div.style.border = '1px solid #ccc';
+    div.style.borderRadius = '5px';
+    div.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
+    div.style.lineHeight = '24px';
+    div.style.fontSize = '14px';
+
+    div.innerHTML += '<strong>Kategori Wisata</strong><br>';
+    categories.forEach(function(cat) {
+        div.innerHTML +=
+            '<i style="background:' + cat.color +
+            '; width: 18px; height: 18px; display: inline-block; margin-right:8px; border-radius:50%;"></i> ' +
+            cat.name + '<br>';
+    });
+
+    return div;
+};
+
+legend.addTo(map);
 
 
 var dataGeojsonUrl = "<?=base_url('assets/geojson/kab_belu.geojson');?>";

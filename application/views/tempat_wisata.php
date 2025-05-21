@@ -62,8 +62,22 @@
         </video>
     </div>
 </section>
+<?php 
+    function count_wisata($data, $kategori){
+        $res = 0;
+
+        foreach ($data as $key => $value) {
+            if($value['nama_kategori'] == $kategori){
+                $res ++;
+            }
+        }
+
+        return $res;
+    }
+?>
 <section class="mt-5">
-    <h3 class="text-center mb-5">Wisata Alam</h3>
+    <h3 class="text-center">Wisata Alam</h3>
+    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Alam');?> wisata alam</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -114,7 +128,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center mb-5">Wisata Religi</h3>
+    <h3 class="text-center">Wisata Religi</h3>
+    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Religi');?> wisata religi</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -165,7 +180,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center mb-5">Wisata Budaya</h3>
+    <h3 class="text-center">Wisata Budaya</h3>
+    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Budaya');?> wisata budaya</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -215,7 +231,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center mb-5">Wisata Buatan</h3>
+    <h3 class="text-center">Wisata Buatan</h3>
+    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Buatan');?> wisata buatan</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -253,7 +270,6 @@
             <?php
                 endif;
             endforeach;
-
             // Jika tidak ada wisata dalam kategori Religi, tampilkan pesan
             if (!$wisata_buatan_ada) :
             ?>
@@ -265,7 +281,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center mb-5">Wisata Kuliner</h3>
+    <h3 class="text-center">Wisata Kuliner</h3>
+    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Kuliner');?> wisata kuliner</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php

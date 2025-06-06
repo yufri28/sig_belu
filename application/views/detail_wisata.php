@@ -91,29 +91,28 @@
                 <small><i class="bi bi-patch-check-fill"></i> <?= $comment['email']; ?></small>
 
                 <?php
-                
-        // Convert 'created_at' to timestamp and calculate the difference
-        $createdAt = strtotime($comment['created_at']);
-        $timeAgo = time() - $createdAt;
-        
-        // Calculate time difference in human-readable format
-        if ($timeAgo < 1) {
-            $timeText = "baru saja"; // If less than 1 second
-        } elseif ($timeAgo < 60) {
-            $timeText = $timeAgo . " detik yang lalu";
-        } elseif ($timeAgo < 3600) {
-            $minutes = floor($timeAgo / 60);
-            $timeText = $minutes . " menit yang lalu";
-        } elseif ($timeAgo < 86400) {
-            $hours = floor($timeAgo / 3600);
-            $timeText = $hours . " jam yang lalu";
-        } elseif ($timeAgo < 2592000) {
-            $days = floor($timeAgo / 86400);
-            $timeText = $days . " hari yang lalu";
-        } else {
-            $timeText = date("d M Y", $createdAt); // For more than a month ago, show the date
-        }
-        ?>
+                    // Convert 'created_at' to timestamp and calculate the difference
+                    $createdAt = strtotime($comment['created_at']);
+                    $timeAgo = time() - $createdAt;
+                    
+                    // Calculate time difference in human-readable format
+                    if ($timeAgo < 1) {
+                        $timeText = "baru saja"; // If less than 1 second
+                    } elseif ($timeAgo < 60) {
+                        $timeText = $timeAgo . " detik yang lalu";
+                    } elseif ($timeAgo < 3600) {
+                        $minutes = floor($timeAgo / 60);
+                        $timeText = $minutes . " menit yang lalu";
+                    } elseif ($timeAgo < 86400) {
+                        $hours = floor($timeAgo / 3600);
+                        $timeText = $hours . " jam yang lalu";
+                    } elseif ($timeAgo < 2592000) {
+                        $days = floor($timeAgo / 86400);
+                        $timeText = $days . " hari yang lalu";
+                    } else {
+                        $timeText = date("d M Y", $createdAt); // For more than a month ago, show the date
+                    }
+                    ?>
 
                 <small class="text-secondary"><?= $timeText; ?></small><br>
                 <?= $comment['komentar']; ?>
@@ -131,8 +130,8 @@
                 <?php if (!empty($comment['replies'])): ?>
                 <ul class="list-group mt-2 reply-list" style="margin-left: 20px;">
                     <?php foreach ($comment['replies'] as $replyIndex => $reply): ?>
-                    <li class="list-group-item reply-item <?= $replyIndex >= 2 ? 'd-none' : ''; ?>"
-                        id="reply-<?= $reply['id_ulasan']; ?>">
+                    <!-- <li class="list-group-item reply-item <?= $replyIndex >= 2 ? 'd-none' : ''; ?>" id="reply-<?= $reply['id_ulasan']; ?>"> -->
+                    <li class="list-group-item reply-item d-none" id="reply-<?= $reply['id_ulasan']; ?>">
                         <small><i class="bi bi-reply-fill"></i> <?= $reply['email']; ?></small>
 
                         <?php
@@ -172,10 +171,13 @@
                     <?php endforeach; ?>
                     <?php if (count($comment['replies']) > 2): ?>
                     <li class="list-group-item">
-                        <button class="btn btn-link btn-sm" onclick="toggleReplies(this)">Lihat lebih banyak
-                            balasan</button>
+                        <button class="btn btn-link btn-sm" data-collapsed="true"
+                            data-total="<?= count($comment['replies']) ?>" onclick="toggleReplies(this)">
+                            <?= count($comment['replies']) ?> balasan ▼
+                        </button>
                     </li>
                     <?php endif; ?>
+
                 </ul>
                 <?php endif; ?>
             </li>
@@ -264,36 +266,45 @@
             const commentItems = document.querySelectorAll('.comment-item');
             const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-            // Check if currently showing more or fewer comments
-            const isShowingMore = loadMoreBtn.textContent.includes('lebih sedikit');
+            // Cek apakah komentar tambahan saat ini disembunyikan (gunakan elemen ke-4 sebagai acuan)
+            const isCollapsed = commentItems[3]?.classList.contains('d-none');
 
+            // Tampilkan/sembunyikan komentar setelah index ke-2 (komentar ke-4 dst)
             commentItems.forEach((item, index) => {
-                // Show first 3 items if hiding, otherwise show all
                 if (index >= 3) {
-                    item.classList.toggle('d-none', !isShowingMore);
+                    item.classList.toggle('d-none', !isCollapsed);
                 }
             });
 
-            // Toggle button text
-            loadMoreBtn.textContent = isShowingMore ? 'Lihat lebih banyak komentar' : 'Lihat lebih sedikit komentar';
+            // Ganti teks tombol
+            loadMoreBtn.textContent = isCollapsed ?
+                'Lihat lebih sedikit komentar' :
+                'Lihat lebih banyak komentar';
         }
+
 
         function toggleReplies(button) {
             const replyItems = button.closest('ul').querySelectorAll('.reply-item');
 
-            // Check if currently showing more or fewer replies
-            const isShowingMore = button.textContent.includes('lebih sedikit');
+            const isCollapsed = button.getAttribute('data-collapsed') === 'true';
+            const totalReplies = button.getAttribute('data-total');
+            const newCollapsed = !isCollapsed;
 
+            // Update tampil/sembunyi
             replyItems.forEach((item, index) => {
-                // Show first 2 items if hiding, otherwise show all
-                if (index >= 2) {
-                    item.classList.toggle('d-none', !isShowingMore);
-                }
+                // if (index >= 2) {
+                // item.classList.toggle('d-none', newCollapsed);
+                // }
+                item.classList.toggle('d-none', newCollapsed);
             });
 
-            // Toggle button text
-            button.textContent = isShowingMore ? 'Lihat lebih banyak balasan' : 'Lihat lebih sedikit balasan';
+            // Perbarui state dan teks tombol
+            button.setAttribute('data-collapsed', newCollapsed);
+            button.textContent = `${totalReplies} balasan ${newCollapsed ? '▼' : '▲'}`;
         }
+
+
+
 
         function showReplyForm(commentId) {
             var replyFormContainer = document.getElementById("replyFormContainer");

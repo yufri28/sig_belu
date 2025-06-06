@@ -5,13 +5,20 @@
         <div class="row">
 
             <div class="col-12 mt-auto mb-5 text-center">
-                <h4 class="d-block d-lg-none"><small>Selamat datang di</small></h4>
-                <h3 class="text-white fs-1 d-block d-lg-none">Sistem Informasi Geografis Pariwisata Kabupaten
+                <h4 class="d-block d-lg-none" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+                    <small>Selamat datang di</small>
+                </h4>
+                <h3 class="text-white fs-1 d-block d-lg-none" data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom">Sistem Informasi Geografis Pariwisata Kabupaten
                     Belu</h3>
-                <h2 class="d-none d-lg-block"><small>Selamat datang di</small></h2>
-                <h1 class="text-white d-none d-lg-block">Sistem Informasi Geografis Pariwisata Kabupaten Belu
+                <h2 class="d-none d-lg-block" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+                    <small>Selamat datang di</small>
+                </h2>
+                <h1 class="text-white d-none d-lg-block" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+                    Sistem Informasi Geografis Pariwisata Kabupaten Belu
                 </h1>
-                <p><small>Sistem Informasi Geografis Pariwisata Kabupaten Belu menyediakan informasi geografis
+                <p data-aos="fade-up" data-aos-anchor-placement="bottom-bottom"><small>Sistem Informasi Geografis
+                        Pariwisata Kabupaten Belu menyediakan informasi geografis
                         di Kabupaten Belu sebanyak 21 destinasi wisata yang terdiri dari beberapa kategori
                         wisata. Sistem ini dibuat untuk memudahkan wisatawan ketika akan mengunjungi destinasi
                         wisata.</small></p>
@@ -19,7 +26,8 @@
             </div>
 
 
-            <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
+            <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center" data-aos="fade-up"
+                data-aos-anchor-placement="bottom-bottom">
                 <div class="location-wrap me-sm-auto py-3 py-lg-0">
                     <h5 class="text-white">
                         <i class="custom-icon bi-geo-alt me-2"></i>
@@ -69,7 +77,7 @@
     </div>
 </section>
 
-<section class="section-padding">
+<section class="section-padding" data-aos="fade-up">
     <div class="container">
         <div id="map" style="height: 650px; z-index: 1;" class="rounded-4 mb-4"></div>
     </div>
@@ -85,7 +93,8 @@
                 // Ambil 1 gambar pertama dari array JSON
                 $foto_ditampilkan = !empty($fotos) ? $fotos[0] : 'default.jpg'; // Fallback ke 'default.jpg' jika tidak ada foto
             ?>
-            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;">
+            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;" data-aos="fade-up"
+                data-aos-anchor-placement="bottom-bottom">
                 <div class="card-img-top img-fluid rounded-4">
                     <a href="<?=base_url('uploads/wisata/') . $foto_ditampilkan;?>"
                         data-lightbox="wisata-<?=$destinasi['id_wisata'];?>"
@@ -112,7 +121,7 @@
     <div class="container">
         <div class="row">
             <h2 class="text-white mb-4">At a Glance</h2>
-            <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
+            <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center" data-aos="fade-right">
                 <div class="services-info">
                     <p class="text-white">Belu adalah kabupaten di Nusa Tenggara Timur yang berbatasan langsung
                         dengan negara Timor Leste. Dengan luas wilayah 1.284,94 km^2 dan terbagi dalam 12
@@ -125,7 +134,7 @@
                         sekarang.</p>
                 </div>
             </div>
-            <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
+            <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center" data-aos="fade-left">
                 <div class="services-info">
                     <p class="text-white">Mayoritas penduduk Belu adalah empat etnis: Tetun, Bunak, Kemak,
                         Dawan, dengan bahasanya sendiri. Sebelum Atambua, ibukota Belu adalah Atapupu yang

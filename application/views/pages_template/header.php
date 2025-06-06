@@ -22,7 +22,7 @@
     <link href="<?=base_url('assets/');?>css/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="<?=base_url('assets/');?>css/templatemo-festava-live.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <!-- Tambahkan CSS Lightbox -->

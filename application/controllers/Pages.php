@@ -65,4 +65,5 @@ class Pages extends CI_Controller {
 		$this->load->view('detail_wisata');
 		$this->load->view('pages_template/footer');
 	}
+
 }

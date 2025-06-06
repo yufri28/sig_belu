@@ -39,6 +39,7 @@ class Ulasan_model extends CI_Model {
     {
         return $this->db->delete('ulasan', ['id_ulasan' => $id_ulasan]);
     }
+    
 
 }
 

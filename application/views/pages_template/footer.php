@@ -54,6 +54,10 @@
 <script src="<?=base_url('assets/');?>js/custom.js"></script>
 <!-- Tambahkan JavaScript Lightbox -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
 </body>
 
 </html>

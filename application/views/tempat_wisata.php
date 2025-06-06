@@ -4,16 +4,18 @@
         <div class="row">
 
             <div class="col-12 mt-auto mb-5 text-center">
-                <p><small> <i>---------------- Top Destination</i></small></p>
-                <h3 class="text-white fs-1 d-block d-lg-none">Yuk Jelajahi destinasi impianmu disini!</h3>
-                <h1 class="text-white d-none d-lg-block">Yuk Jelajahi destinasi impianmu disini!
+                <p data-aos="fade-right"><small> <i>---------------- Top Destination</i></small></p>
+                <h3 class="text-white fs-1 d-block d-lg-none" data-aos="fade-left">Yuk Jelajahi destinasi impianmu
+                    disini!</h3>
+                <h1 class="text-white d-none d-lg-block" data-aos="fade-left">Yuk Jelajahi destinasi impianmu disini!
                 </h1>
-                <p><small>Daftar daya tarik wisata Kabupaten Belu yang terbagi dalam 5 kategori wisata.</small>
+                <p data-aos="fade-up"><small>Daftar daya tarik wisata Kabupaten Belu yang terbagi dalam 5 kategori
+                        wisata.</small>
                 </p>
             </div>
 
 
-            <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
+            <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center" data-aos="fade-up">
                 <div class="location-wrap me-sm-auto py-3 py-lg-0">
                     <h5 class="text-white">
                         <i class="custom-icon bi-geo-alt me-2"></i>
@@ -76,8 +78,8 @@
     }
 ?>
 <section class="mt-5">
-    <h3 class="text-center">Wisata Alam</h3>
-    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Alam');?> wisata alam</p>
+    <h3 class="text-center" data-aos="fade-right">Wisata Alam</h3>
+    <p class="text-center mb-5" data-aos="fade-up"><?=count_wisata($wisata_list, 'Alam');?> wisata alam</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -87,7 +89,7 @@
                 if ($value['nama_kategori'] == 'Alam') :
                     $wisata_alam_ada = true; // Jika ada wisata dalam kategori Religi, ubah indikator menjadi true
             ?>
-            <div class="card col-4 text-center bg-transparent border-0" style="width: 25rem;">
+            <div class="card col-4 text-center bg-transparent border-0" style="width: 25rem;" data-aos="fade-up">
                 <?php
                 // Decode JSON foto
                 $fotos = json_decode($value['foto'], true);
@@ -128,8 +130,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center">Wisata Religi</h3>
-    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Religi');?> wisata religi</p>
+    <h3 class="text-center" data-aos="fade-right">Wisata Religi</h3>
+    <p class="text-center mb-5" data-aos="fade-up"><?=count_wisata($wisata_list, 'Religi');?> wisata religi</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -139,7 +141,7 @@
                 if ($value['nama_kategori'] == 'Religi') :
                     $wisata_religi_ada = true; // Jika ada wisata dalam kategori Religi, ubah indikator menjadi true
             ?>
-            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;">
+            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;" data-aos="fade-up">
                 <?php
                 // Decode JSON foto
                 $fotos = json_decode($value['foto'], true);
@@ -180,8 +182,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center">Wisata Budaya</h3>
-    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Budaya');?> wisata budaya</p>
+    <h3 class="text-center" data-aos="fade-right">Wisata Budaya</h3>
+    <p class="text-center mb-5" data-aos="fade-up"><?=count_wisata($wisata_list, 'Budaya');?> wisata budaya</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -191,7 +193,7 @@
                 if ($value['nama_kategori'] == 'Budaya') :
                     $wisata_budaya_ada = true; // Jika ada wisata dalam kategori Religi, ubah indikator menjadi true
             ?>
-            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;">
+            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;" data-aos="fade-up">
                 <?php
                 // Decode JSON foto
                 $fotos = json_decode($value['foto'], true);
@@ -231,8 +233,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center">Wisata Buatan</h3>
-    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Buatan');?> wisata buatan</p>
+    <h3 class="text-center" data-aos="fade-right">Wisata Buatan</h3>
+    <p class="text-center mb-5" data-aos="fade-up"><?=count_wisata($wisata_list, 'Buatan');?> wisata buatan</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -242,7 +244,7 @@
                 if ($value['nama_kategori'] == 'Buatan') :
                     $wisata_buatan_ada = true; // Jika ada wisata dalam kategori Religi, ubah indikator menjadi true
             ?>
-            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;">
+            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;" data-aos="fade-up">
                 <?php
                 // Decode JSON foto
                 $fotos = json_decode($value['foto'], true);
@@ -281,8 +283,8 @@
     </div>
 </section>
 <section class="mt-5">
-    <h3 class="text-center">Wisata Kuliner</h3>
-    <p class="text-center mb-5"><?=count_wisata($wisata_list, 'Kuliner');?> wisata kuliner</p>
+    <h3 class="text-center" data-aos="fade-right">Wisata Kuliner</h3>
+    <p class="text-center mb-5" data-aos="fade-up"><?=count_wisata($wisata_list, 'Kuliner');?> wisata kuliner</p>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <?php
@@ -292,7 +294,7 @@
                 if ($value['nama_kategori'] == 'Kuliner') :
                     $wisata_kuliner_ada = true; // Jika ada wisata dalam kategori Religi, ubah indikator menjadi true
             ?>
-            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;">
+            <div class="card col-4 bg-transparent text-center border-0" style="width: 25rem;" data-aos="fade-up">
                 <?php
                 // Decode JSON foto
                 $fotos = json_decode($value['foto'], true);

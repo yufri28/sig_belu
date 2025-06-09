@@ -6,12 +6,14 @@ class Pages extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('Visitor');
         $this->load->model('Wisata_model');
         $this->load->model('Kunjungan_model');
         $this->load->model('Fasilitas_model');
         $this->load->model('Larangan_model');
         $this->load->model('Ulasan_model');
         $this->load->model('Contact_model');
+		$this->visitor->track();
 	}
     
 	public function index()

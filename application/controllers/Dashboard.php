@@ -14,6 +14,7 @@ class Dashboard extends CI_Controller {
 		
         $this->load->model('Wisata_model');
         $this->load->model('Kunjungan_model');
+		$this->load->model('Visitors_model');
 	}
 
 	public function index()
@@ -32,6 +33,13 @@ class Dashboard extends CI_Controller {
 			?$this->get_kunjungan_data()
 			:$this->get_kunjungan_data($this->session->userdata('user_id')),
 		];
+
+		// Get visitor statistics
+        $data['today_visitors'] = $this->Visitors_model->get_today_visitors();
+        $data['month_visitors'] = $this->Visitors_model->get_month_visitors();
+        $data['year_visitors'] = $this->Visitors_model->get_year_visitors();
+        $data['total_visitors'] = $this->Visitors_model->get_total_visitors();
+		
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/index');
 		$this->load->view('admin/templates/footer');	

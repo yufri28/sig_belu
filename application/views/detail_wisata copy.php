@@ -86,7 +86,7 @@
         <ul class="list-group" id="commentList">
             <?php foreach ($ulasan as $index => $comment): ?>
             <!-- Komentar Utama -->
-            <li class="list-group-item comment-item <?= $index >= 3 ? 'd-none' : ''; ?>" data-index="<?= $index ?>"
+            <li class="list-group-item comment-item <?= $index >= 3 ? 'd-none' : ''; ?>"
                 id="comment-<?= $comment['id_ulasan']; ?>">
                 <small><i class="bi bi-patch-check-fill"></i> <?= $comment['email']; ?></small>
 
@@ -184,6 +184,7 @@
             <?php endforeach; ?>
         </ul>
 
+
         <?php if (count($ulasan) > 3): ?>
         <button class="btn btn-link btn-sm" id="loadMoreBtn" onclick="toggleComments()">Lihat lebih banyak
             komentar</button>
@@ -261,52 +262,25 @@
         }
 
 
-        let currentIndex = 0;
-        const commentsPerPage = 3;
-
         function toggleComments() {
-            const comments = document.querySelectorAll('.comment-item');
-            comments.forEach(c => c.classList.add('d-none'));
+            const commentItems = document.querySelectorAll('.comment-item');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-            // Hitung index awal dan akhir
-            const start = currentIndex;
-            const end = currentIndex + commentsPerPage;
+            // Cek apakah komentar tambahan saat ini disembunyikan (gunakan elemen ke-4 sebagai acuan)
+            const isCollapsed = commentItems[3]?.classList.contains('d-none');
 
-            for (let i = start; i < end && i < comments.length; i++) {
-                comments[i].classList.remove('d-none');
-            }
+            // Tampilkan/sembunyikan komentar setelah index ke-2 (komentar ke-4 dst)
+            commentItems.forEach((item, index) => {
+                if (index >= 3) {
+                    item.classList.toggle('d-none', !isCollapsed);
+                }
+            });
 
-            currentIndex += commentsPerPage;
-
-            // Jika sudah mencapai akhir komentar, sembunyikan tombol
-            if (currentIndex >= comments.length) {
-                document.getElementById('loadMoreBtn').style.display = 'none';
-            }
+            // Ganti teks tombol
+            loadMoreBtn.textContent = isCollapsed ?
+                'Lihat lebih sedikit komentar' :
+                'Lihat lebih banyak komentar';
         }
-
-        // Jalankan pertama kali saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', () => {
-            toggleComments(); // Memastikan hanya 3 pertama yang tampil
-        });
-        // function toggleComments() {
-        //     const commentItems = document.querySelectorAll('.comment-item');
-        //     const loadMoreBtn = document.getElementById('loadMoreBtn');
-
-        //     // Cek apakah komentar tambahan saat ini disembunyikan (gunakan elemen ke-4 sebagai acuan)
-        //     const isCollapsed = commentItems[3]?.classList.contains('d-none');
-
-        //     // Tampilkan/sembunyikan komentar setelah index ke-2 (komentar ke-4 dst)
-        //     commentItems.forEach((item, index) => {
-        //         if (index >= 3) {
-        //             item.classList.toggle('d-none', !isCollapsed);
-        //         }
-        //     });
-
-        //     // Ganti teks tombol
-        //     loadMoreBtn.textContent = isCollapsed ?
-        //         'Lihat lebih sedikit komentar' :
-        //         'Lihat lebih banyak komentar';
-        // }
 
 
         function toggleReplies(button) {
